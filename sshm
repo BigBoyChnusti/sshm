@@ -1,6 +1,17 @@
 #!/bin/bash
+#
+#Enviorment declaration
+
+
+
+#Main loop
 while true; do
 clear
+gum style \
+	--foreground 212 --border-foreground 212 --border double \
+	--align center --width 50 --margin "1 2" --padding "2 4" \
+	'sshm' 'your ssh connection manager!'
+
 menuselectinput=$(cat menu | gum choose --limit=1) 
 menuselect="$(echo $menuselectinput | grep -Eo "[0-9]+")"
 
@@ -19,7 +30,7 @@ case $menuselect in
         else
             #open SSH Connection
             
-            gum confirm && eval ssh $sshun@$sshhost || echo "abort"
+            gum confirm "Do you wanna connect?" && eval ssh $sshun@$sshhost || echo "abort"
             fi
             ;;
         
@@ -42,7 +53,7 @@ case $menuselect in
             ;;  
         3)
             #Exit
-            gum confirm && echo "Closing Script" && exit 0 || echo "Okay"
+            gum confirm "close sshm?" && echo "Closing Script" && exit 0 || echo "Okay"
             ;;
     esac
 done
