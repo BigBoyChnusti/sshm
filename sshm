@@ -25,9 +25,9 @@ case $menuselect in
             sshun=$(cat connections.json | jq '.connections[] | select (.ID=='$sshid')' | jq '.username')
            
             if [[ "$sshselect" == '"back"' ]] 
-            then
-            echo "going back"
-        else
+	    then
+
+	    else
             #open SSH Connection
             
             gum confirm "Do you wanna connect?" && eval ssh $sshun@$sshhost || echo "abort"
