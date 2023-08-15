@@ -1,0 +1,17 @@
+Cluster 1:  ssh clus1
+Cluster 2:  ssh clus2
+Cluster 3:  ssh clus3
+Chemjournal: ssh chemjournal
+*NEW*Chmjournal:    ssh eln
+IPA:    ssh ipa
+DHCP:   ssh dhcp
+LIZ:    ssh liz
+Monitoring: ssh lnms
+Wiki:   ssh wiki
+Web:    ssh web
+Backup: ssh backup
+Luber 1:    ssh lub1
+Luber 2:    ssh lub2
+Luber 3:    ssh lub3
+Luber Storage:  ssh lubstor
+VMH01:  ssh vmh01

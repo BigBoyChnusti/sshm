@@ -1,0 +1,10 @@
+#!/bin/bash
+#
+while true; do
+
+select=$(cat list.txt | gum choose --limit=1)
+
+command_to_execute="$(echo $select | cut -d':' -f2-)"  
+gum confirm && eval "$command_to_execute"  || echo "abort"
+
+
