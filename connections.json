@@ -5,12 +5,6 @@
       "name": "back",
       "hostname": "",
       "username": ""
-    },
-    {
-      "ID": "1",
-      "name": "box",
-      "hostname": "orange.whatbox.ca",
-      "username": "chnusti"
     }
   ]
 }
