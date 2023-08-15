@@ -1,6 +1,24 @@
 #!/bin/bash
 #
 #Enviorment declaration
+export GUM_CONFIRM_SELECTED_FOREGROUND="#fbf1c7"
+export GUM_CONFIRM_SELECTED_PADDING=""
+export GUM_CONFIRM_SELECTED_BACKGROUND="#79740e"
+export GUM_CONFIRM_SELECTED_MARGIN="2 9"
+export GUM_CONFIRM_UNSELECTED_MARGIN="2 9"
+export GUM_CONFIRM_UNSELECTED_PADDING=""
+export GUM_CONFIRM_UNSELECTED_FOREGROUND="#fbf1c7"
+export GUM_CONFIRM_PROMPT_MARGIN=""
+export GUM_CONFIRM_PROMPT_FOREGROUND="#fbf1c7"
+export GUM_CHOOSE_CURSOR_FOREGROUND="#79740e"
+export GUM_CHOOSE_ITEM_FOREGROUND="#fbf1c7"
+export GUM_CHOOSE_ITEM_MARGIN="0 5"
+export GUM_CHOOSE_CURSOR_MARGIN="0 2"
+export GUM_INPUT_PROMPT_FOREGROUND="#fbf1c7"
+export GUM_INPUT_PROMPT_MARGIN="0 3"
+export GUM_INPUT_CURSOR_MARGIN="0 -2"
+export GUM_INPUT_CURSOR_FOREGROUND="#79740e"
+
 
 
 
@@ -8,7 +26,7 @@
 while true; do
 clear
 gum style \
-	--foreground 212 --border-foreground 212 --border double \
+	--foreground "#fbf1c7" --border-foreground "#79740e" --border double \
 	--align center --width 50 --margin "1 2" --padding "2 4" \
 	'sshm' 'your ssh connection manager!'
 
@@ -19,18 +37,20 @@ case $menuselect in
         1)
             #Connect
             #Get information from JSON
-            sshselect=$(cat connections.json | jq '.connections[].name' | gum choose)
-            sshid=$(cat connections.json | jq '.connections[] | select (.name=='$sshselect')' | jq '.ID')
+
+	    sshselect=$(cat connections.json | jq '.connections[].name' | gum choose)
+          
+	    sshid=$(cat connections.json | jq '.connections[] | select (.name=='$sshselect')' | jq '.ID')
             sshhost=$(cat connections.json | jq '.connections[] | select (.ID=='$sshid')' | jq '.hostname')
             sshun=$(cat connections.json | jq '.connections[] | select (.ID=='$sshid')' | jq '.username')
            
             if [[ "$sshselect" == '"back"' ]] 
 	    then
-
-	    else
+		    echo ""
+			else
             #open SSH Connection
             
-            gum confirm "Do you wanna connect?" && eval ssh $sshun@$sshhost || echo "abort"
+	    gum confirm "Do you wanna connect?" && gum spin --spinner dot --title "loading connection" -- sleep 3 && eval ssh $sshun@$sshhost || echo "abort"
             fi
             ;;
         
