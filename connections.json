@@ -4,7 +4,13 @@
       "ID": "",
       "name": "back",
       "hostname": "",
-      "username": "" 
+      "username": ""
+    },
+    {
+      "ID": "1",
+      "name": "box",
+      "hostname": "orange.whatbox.ca",
+      "username": "chnusti"
     }
   ]
 }
