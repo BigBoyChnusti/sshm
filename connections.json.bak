@@ -1,0 +1,22 @@
+{
+      "connections": [
+        {
+          "ID": "1",
+          "name": "Monitoring",
+          "hostname": "lnms.chem.uzh.ch",
+          "username": "root"
+        },
+        {
+          "ID": "2",
+          "name": "DHCP",
+          "hostname": "dhcp.chem.uzh.ch",
+          "username": "root"
+        },
+        {
+          "ID": "3",
+          "name": "Wiki",
+          "hostname": "wiki.chem.uzh.ch",
+          "username": "root"
+        }
+      ]
+    }
