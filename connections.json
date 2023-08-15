@@ -1,10 +1,10 @@
 {
   "connections": [
     {
-      "ID": "1",
-      "name": "example",
-      "hostname": "example.example.ch",
-      "username": "root"
+      "ID": "",
+      "name": "back",
+      "hostname": "",
+      "username": ""
     }
-  ]
+ ]
 }

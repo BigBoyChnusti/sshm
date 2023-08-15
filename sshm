@@ -1,6 +1,6 @@
 #!/bin/bash
 while true; do
-
+clear
 menuselectinput=$(cat menu | gum choose --limit=1) 
 menuselect="$(echo $menuselectinput | grep -Eo "[0-9]+")"
 
@@ -12,10 +12,15 @@ case $menuselect in
             sshid=$(cat connections.json | jq '.connections[] | select (.name=='$sshselect')' | jq '.ID')
             sshhost=$(cat connections.json | jq '.connections[] | select (.ID=='$sshid')' | jq '.hostname')
             sshun=$(cat connections.json | jq '.connections[] | select (.ID=='$sshid')' | jq '.username')
-            
+           
+            if [[ "$sshselect" == '"back"' ]] 
+            then
+            echo "going back"
+        else
             #open SSH Connection
-            gum confirm && eval ssh $sshun@$sshhost || echo "abort"
             
+            gum confirm && eval ssh $sshun@$sshhost || echo "abort"
+            fi
             ;;
         
         2)
