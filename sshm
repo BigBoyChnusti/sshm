@@ -31,7 +31,7 @@ gum style \
 	--align center --width 50 --margin "1 2" --padding "2 4" \
 	'sshm' 'your ssh connection manager!'
 
-menuselectinput=$(cat menu | gum choose --limit=1) 
+menuselectinput=$(cat ~/scripts/sshm/menu | gum choose --limit=1) 
 menuselect="$(echo $menuselectinput | grep -Eo "[0-9]+")"
 
 case $menuselect in
@@ -39,20 +39,20 @@ case $menuselect in
             #Connect
             #Get information from JSON
 
-	    sshselect=$(cat connections.json | jq '.connections[].name' | gum choose)
+	    sshselect=$(cat /home/user1/scripts/sshm/connections.json | jq '.connections[].name' | gum choose)
           
-	    sshid=$(cat connections.json | jq '.connections[] | select (.name=='$sshselect')' | jq '.ID')
-            sshhost=$(cat connections.json | jq '.connections[] | select (.ID=='$sshid')' | jq '.hostname')
-            sshun=$(cat connections.json | jq '.connections[] | select (.ID=='$sshid')' | jq '.username')
+	    sshid=$(cat ~/scripts/sshm/connections.json | jq '.connections[] | select (.name=='$sshselect')' | jq '.ID')
+            sshhost=$(cat ~/scripts/sshm/connections.json | jq '.connections[] | select (.ID=='$sshid')' | jq '.hostname')
+            sshun=$(cat ~/scripts/sshm/connections.json | jq '.connections[] | select (.ID=='$sshid')' | jq '.username')
            
-            if [[ "$sshselect" == '"back"' ]] 
-	    then
-		    echo ""
-			else
+#            if [[ "$sshselect" == '"back"' ]] 
+#	    then
+#		    echo ""
+#			else
             #open SSH Connection
             
 	    gum confirm "Do you wanna connect?" && gum spin --spinner dot --title "loading connection" -- sleep 3 && eval ssh $sshun@$sshhost || echo "abort"
-            fi
+#            fi
             ;;
         
         2)
@@ -63,18 +63,22 @@ case $menuselect in
             newsshun=$(gum input --prompt "What user should we use to connect?: " --placeholder "root")
 
             #Find highest ID
-            highestid=$(cat connections.json | jq -r 'map(.[].ID) | max')
+            highestid=$(cat ~/scripts/sshm/connections.json | jq -r 'map(.[].ID) | max')
             nextid=$((highestid+1))
             
-            #Write JSON entry
-            touch tmp.json
-            jq '.connections += [{"ID": "'$nextid'", "name": "'$newsshname'", "hostname": "'$newsshhostname'", "username": "'$newsshun'"}]' connections.json | cat >> tmp.json
-            cp tmp.json connections.json
-            rm tmp.json
-            ;;  
+           #Write JSON entry
+            touch ~/scripts/sshm/tmp.json
+            jq '.connections += [{"ID": "'$nextid'", "name": "'$newsshname'", "hostname": "'$newsshhostname'", "username": "'$newsshun'"}]' ~/scripts/sshm/connections.json | cat >> ~/scripts/sshm/tmp.json
+            mv ~/scripts/sshm/tmp.json ~/scripts/sshm/connections.json
+	        
+            touch ~/scripts/sshm/tmpss.json
+            jq '.connections += [{"ID": "'$nextid'", "name": "'$newsshname'", "hostname": "'$newsshhostname'", "username": "'$newsshun'"}]' ~/scripts/sshm/connectionsss.json | cat >> ~/scripts/sshm/tmpss.json
+            mv ~/scripts/sshm/tmpss.json ~/scripts/sshm/connectionsss.json
+
+            ;; 
         3)
             #Exit
             gum confirm "close sshm?" && echo "Closing Script" && exit 0 || echo "Okay"
-            ;;
+	    ;;
     esac
 done
