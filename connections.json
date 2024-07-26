@@ -5,66 +5,6 @@
       "name": "back",
       "hostname": "",
       "username": ""
-    },
-    {
-      "ID": "1",
-      "name": "eln",
-      "hostname": "eln.chem.uzh.ch",
-      "username": "root"
-    },
-    {
-      "ID": "2",
-      "name": "Cluster1",
-      "hostname": "clus1.chem.uzh.ch",
-      "username": "root"
-    },
-    {
-      "ID": "3",
-      "name": "Cluster2",
-      "hostname": "clus2.chem.uzh.ch",
-      "username": "root"
-    },
-    {
-      "ID": "4",
-      "name": "Cluster3",
-      "hostname": "clus3.chem.uzh.ch",
-      "username": "root"
-    },
-    {
-      "ID": "5",
-      "name": "IPA",
-      "hostname": "ipa.chem.uzh.ch",
-      "username": "root"
-    },
-    {
-      "ID": "6",
-      "name": "DHCP",
-      "hostname": "dhcp.chem.uzh.ch",
-      "username": "root"
-    },
-    {
-      "ID": "7",
-      "name": "LIZ",
-      "hostname": "liz.chem.uzh.ch",
-      "username": "root"
-    },
-    {
-      "ID": "8",
-      "name": "LNMS",
-      "hostname": "lnms.chem.uzh.ch",
-      "username": "root"
-    },
-    {
-      "ID": "9",
-      "name": "Wiki",
-      "hostname": "wiki.chem.uzh.ch",
-      "username": "root"
-    },
-    {
-      "ID": "10",
-      "name": "LUB-Server-1",
-      "hostname": "lub-srv01.chem.uzh.ch",
-      "username": "root"
     }
   ]
 }
