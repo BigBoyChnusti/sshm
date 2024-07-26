@@ -17,7 +17,7 @@ export GUM_INPUT_CURSOR_FOREGROUND="#79740e"
 export GUM_SPIN_SPINNER_MARGIN="0 10"
 #Main loop
 #put path here:
-loc=/home/user1/sshm
+loc="/home/user1/sshm"
 while true; do
 clear
 gum style \
@@ -25,7 +25,7 @@ gum style \
 	--align center --width 50 --margin "1 2" --padding "2 4" \
 	'sshm' 'your ssh connection manager!'
 
-menuselectinput=$(cat $loc/menu | gum choose --limit=1) 
+menuselectinput=$(cat "$loc"/menu | gum choose --limit=1) 
 menuselect="$(echo $menuselectinput | grep -Eo "[0-9]+")"
 
 case $menuselect in
@@ -33,11 +33,11 @@ case $menuselect in
             #Connect
             #Get information from JSON
 
-	    sshselect=$(cat $loc/connections.json | jq '.connections[].name' | gum choose)
+	    sshselect=$(cat "$loc"/connections.json | jq '.connections[].name' | gum choose)
           
-	    sshid=$(cat $loc/connections.json  | jq '.connections[] | select (.name=='$sshselect')' | jq '.ID')
-            sshhost=$(cat $loc/connections.json | jq '.connections[] | select (.ID=='$sshid')' | jq '.hostname')
-            sshun=$(cat $loc/connections.json | jq '.connections[] | select (.ID=='$sshid')' | jq '.username')
+	    sshid=$(cat "$loc"/connections.json  | jq '.connections[] | select (.name=='$sshselect')' | jq '.ID')
+            sshhost=$(cat "$loc"/connections.json | jq '.connections[] | select (.ID=='$sshid')' | jq '.hostname')
+            sshun=$(cat "$loc"/connections.json | jq '.connections[] | select (.ID=='$sshid')' | jq '.username')
            
             if [[ "$sshselect" == '"back"' ]] 
 	    then
@@ -57,7 +57,7 @@ case $menuselect in
             newsshun=$(gum input --prompt "What user should we use to connect?: " --placeholder "root")
 
             #Find highest ID
-            highestid=$(cat $loc/connections.json | jq -r 'map(.[].ID) | max')
+            highestid=$(cat "$loc"/connections.json | jq -r 'map(.[].ID) | max')
             nextid=$((highestid+1))
 
             gum style \
@@ -73,10 +73,10 @@ case $menuselect in
             then
 
             #Write JSON entry
-            touch $loc/tmp.json
-            jq '.connections += [{"ID": "'$nextid'", "name": "'$newsshname'", "hostname": "'$newsshhostname'", "username": "'$newsshun'"}]' $loc/connections.json | cat >> $loc/tmp.json
-            cp $loc/tmp.json $loc/connections.json
-            rm $loc/tmp.json
+            touch "$loc"/tmp.json
+            jq '.connections += [{"ID": "'$nextid'", "name": "'$newsshname'", "hostname": "'$newsshhostname'", "username": "'$newsshun'"}]' "$loc"/connections.json | cat >> "$loc"/tmp.json
+            cp "$loc"/tmp.json "$loc"/connections.json
+            rm "$loc"/tmp.json
 
         else
             echo "abort"
