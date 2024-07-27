@@ -51,9 +51,9 @@ case $menuselect in
         2)
             #Add connection
             #Get User Input
-            newsshname=$(gum input --prompt "What's the name of this new Connection: " --placeholder "DHCP")
-            newsshhostname=$(gum input --prompt "What Hostname shoud we use?: " --placeholder "sun.enterprise.com")
-            newsshun=$(gum input --prompt "What user should we use to connect?: " --placeholder "root")
+            newsshname=$(gum input --prompt "What's the name of this new Connection:         " --placeholder "DHCP")
+            newsshhostname=$(gum input --prompt "What Hostname shoud we use?:        " --placeholder "sun.enterprise.com")
+            newsshun=$(gum input --prompt "What user should we use to connect?:      " --placeholder "root")
 
             #Find highest ID
             highestid=$(cat "$loc"/connections.json | jq -r 'map(.[].ID) | max')
