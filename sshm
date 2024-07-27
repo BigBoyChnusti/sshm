@@ -39,7 +39,7 @@ case $menuselect in
             sshhost=$(cat "$loc"/connections.json | jq '.connections[] | select (.ID=='$sshid')' | jq '.hostname')
             sshun=$(cat "$loc"/connections.json | jq '.connections[] | select (.ID=='$sshid')' | jq '.username')
            
-            if [[ "$sshselect" == '"back"' ]] 
+            if [[ $sshselect == '"back"' ]] 
 	    then
 		    echo ""
 			else
