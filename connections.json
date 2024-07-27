@@ -5,6 +5,12 @@
       "name": "back",
       "hostname": "",
       "username": ""
+    },
+    {
+      "ID": "1",
+      "name": "ansible",
+      "hostname": "ansible.local",
+      "username": "user1"
     }
   ]
 }
