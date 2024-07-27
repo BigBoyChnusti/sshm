@@ -38,7 +38,7 @@ case $menuselect in
             sshhost=$(cat "$loc"/connections.json | jq '.connections[] | select (.ID=='$sshid')' | jq '.hostname')
             sshun=$(cat "$loc"/connections.json | jq '.connections[] | select (.ID=='$sshid')' | jq '.username')
            
-            if [[ $sshselect == '"back"' ]] 
+            if [[ $sshselect == '"back"' ]];
 	    then
 		    echo ""
 			else
@@ -68,13 +68,12 @@ case $menuselect in
             
             gum confirm "Are the values above correct?" && entryconfirm="1" || entryconfirm="0"
 
-            if [[ "$entryconfirm" == "1" ]]
+            if [[ "$entryconfirm" == "1" ]];
             then
 
             #Write JSON entry
             touch "$loc"/tmp.json
             jq '.connections += [{"ID": "'$nextid'", "name": "'$newsshname'", "hostname": "'$newsshhostname'", "username": "'$newsshun'"}]' "$loc"/connections.json | cat >> "$loc"/tmp.json
-           pause
             cp "$loc"/tmp.json "$loc"/connections.json
             rm "$loc"/tmp.json
 
