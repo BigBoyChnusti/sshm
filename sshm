@@ -33,9 +33,8 @@ case $menuselect in
             #Connect
             #Get information from JSON
 
-	    sshselect=$(cat "$loc"/connections.json | jq '.connections[].name' | gum choose)
-          
-	    sshid=$(cat "$loc"/connections.json  | jq '.connections[] | select (.name=='$sshselect')' | jq '.ID')
+	        sshselect=$(cat "$loc"/connections.json | jq '.connections[].name' | gum choose)
+            sshid=$(cat "$loc"/connections.json  | jq '.connections[] | select (.name=='$sshselect')' | jq '.ID')
             sshhost=$(cat "$loc"/connections.json | jq '.connections[] | select (.ID=='$sshid')' | jq '.hostname')
             sshun=$(cat "$loc"/connections.json | jq '.connections[] | select (.ID=='$sshid')' | jq '.username')
            
@@ -75,6 +74,7 @@ case $menuselect in
             #Write JSON entry
             touch "$loc"/tmp.json
             jq '.connections += [{"ID": "'$nextid'", "name": "'$newsshname'", "hostname": "'$newsshhostname'", "username": "'$newsshun'"}]' "$loc"/connections.json | cat >> "$loc"/tmp.json
+           pause
             cp "$loc"/tmp.json "$loc"/connections.json
             rm "$loc"/tmp.json
 
