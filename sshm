@@ -12,8 +12,8 @@ export GUM_CONFIRM_PROMPT_FOREGROUND="#fbf1c7"
 export GUM_SPIN_SPINNER_FOREGROUND="#fbf1c7"
 export GUM_SPIN_TITLE_FOREGROUND="#fbf1c7"
 export GUM_SPIN_SPINNER_MARGIN="0 10"
-export GUM_WRITE_PROMPT_FOREGROUND="#fbf1c7"
-export GUM_WRITE_CURSOR_FOREGROUND="#79740e"
+export GUM_INPUT_PROMPT_FOREGROUND="#fbf1c7"
+export GUM_INPUT_CURSOR_FOREGROUND="#79740e"
 export GUM_SPIN_SPINNER_MARGIN="0 10"
 #Main loop
 #put path here:
@@ -38,7 +38,7 @@ case $menuselect in
             sshhost=$(cat "$loc"/connections.json | jq '.connections[] | select (.ID=='$sshid')' | jq '.hostname')
             sshun=$(cat "$loc"/connections.json | jq '.connections[] | select (.ID=='$sshid')' | jq '.username')
            
-            if [[ $sshselect == '"back"' ]];
+            if [[ $sshselect == '"back"' ]] 
 	    then
 		    echo ""
 			else
@@ -51,9 +51,9 @@ case $menuselect in
         2)
             #Add connection
             #Get User Input
-            newsshname=$(gum write --prompt "What's the name of this new Connection: " --placeholder "DHCP")
-            newsshhostname=$(gum write --prompt "What Hostname shoud we use?: " --placeholder "sun.enterprise.com")
-            newsshun=$(gum write --prompt "What user should we use to connect?: " --placeholder "root")
+            newsshname=$(gum input --prompt "What's the name of this new Connection: " --placeholder "DHCP")
+            newsshhostname=$(gum input --prompt "What Hostname shoud we use?: " --placeholder "sun.enterprise.com")
+            newsshun=$(gum input --prompt "What user should we use to connect?: " --placeholder "root")
 
             #Find highest ID
             highestid=$(cat "$loc"/connections.json | jq -r 'map(.[].ID) | max')
@@ -68,12 +68,13 @@ case $menuselect in
             
             gum confirm "Are the values above correct?" && entryconfirm="1" || entryconfirm="0"
 
-            if [[ "$entryconfirm" == "1" ]];
+            if [[ "$entryconfirm" == "1" ]]
             then
 
             #Write JSON entry
             touch "$loc"/tmp.json
             jq '.connections += [{"ID": "'$nextid'", "name": "'$newsshname'", "hostname": "'$newsshhostname'", "username": "'$newsshun'"}]' "$loc"/connections.json | cat >> "$loc"/tmp.json
+           pause
             cp "$loc"/tmp.json "$loc"/connections.json
             rm "$loc"/tmp.json
 
