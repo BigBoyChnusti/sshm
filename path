@@ -1,0 +1,6 @@
+#!/bin/bash
+export GUM_INPUT_PROMPT_FOREGROUND="#fbf1c7"
+export GUM_INPUT_CURSOR_FOREGROUND="#79740e"
+dir=$(gum input --prompt "Input path to DIR: ")
+
+sed -i '/^loc=/c\'"loc=$dir" sshm
